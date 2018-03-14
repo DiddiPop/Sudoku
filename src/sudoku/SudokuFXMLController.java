@@ -5,12 +5,13 @@
  */
 package sudoku;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
@@ -18,9 +19,25 @@ import javafx.fxml.Initializable;
  * @author Diddi
  */
 public class SudokuFXMLController implements Initializable {
+    @FXML
+    private GridPane gridPane;
+    @FXML
+    private Label[][] label = new Label[9][9];
     
     int a[][] = new int[9][9];
     
+    @FXML
+    private void setGUI() {
+        int num =0;
+        for (int i = 0; i < label.length; i++) {
+            for (int j = 0; j < label.length; j++) {
+                a[i][j] = num;
+                label[i][j] = new Label();
+                label[i][j].setText(String.valueOf(num));
+                gridPane.add(label[i][j], i, j);
+            }
+        }
+    }
     public void generate(){
         int x=1;
         int y=1;
@@ -56,8 +73,7 @@ public class SudokuFXMLController implements Initializable {
     }
     public void combination_col(int x,int y){
         int temp;
-            for(int j=0;j<9;j++)
-            {
+            for(int j=0;j<9;j++){
                temp=a[j][x];
                a[j][x]=a[j][y];
                a[j][y]=temp;
@@ -89,11 +105,9 @@ public class SudokuFXMLController implements Initializable {
    generate();
    random_gen(1);
    random_gen(0);
-   
-   for(int i=0;i<9;i++)
-   {
-      for(int j=0;j<9;j++)
-      {
+
+   for(int i=0;i<9;i++){
+      for(int j=0;j<9;j++){
           if(j==3 || j==6){
                 System.out.print(" ");
             }
@@ -102,10 +116,9 @@ public class SudokuFXMLController implements Initializable {
       System.out.println(" ");
             if(i==2 || i==5 || i==8){
                 System.out.println(" ");
-            }
+            }   
    }
-
- 
+           
 
     }  
 }
